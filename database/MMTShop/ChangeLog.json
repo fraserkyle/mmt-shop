@@ -1,34 +1,30 @@
 {
 	"Changes": [
 		{
-			"Version": "0.0.0.4",
-			"ReleaseDate": "2020-08-12 12:59:00",
-			"Scripts": [
-				"Catalogue.spGetProductsByCategoryId"
-			]
-		},
-		{
-			"Version": "0.0.0.3",
-			"ReleaseDate": "2020-08-12 10:44:00",
-			"Scripts": [
-				"Catalogue.spGetCategories"
-			]
-		},
-		{
-			"Version": "0.0.0.2",
-			"ReleaseDate": "2020-08-12 01:44:00",
-			"Scripts": [
-				"Catalogue.spGetFeaturedProducts"
-			]
-		},
-		{
 			"Version": "0.0.0.1",
-			"ReleaseDate": "2020-08-12 00:00:00",
 			"Scripts": [
 				"Schema",
 				"00002_InsertCategories",
 				"00002_InsertProducts"
 			]
-		}
+		},
+		{
+			"Version": "0.0.0.2",
+			"Scripts": [
+				"Catalogue.spGetFeaturedProducts"
+			]
+		},
+		{
+			"Version": "0.0.0.3",
+			"Scripts": [
+				"Catalogue.spGetCategories"
+			]
+		},		
+		{
+			"Version": "0.0.0.4",
+			"Scripts": [
+				"Catalogue.spGetProductsByCategoryId"
+			]
+		}	
 	]
 }

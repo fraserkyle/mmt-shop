@@ -20,7 +20,7 @@
 	
     <ItemGroup>
 	  <Content Include="..\..\database\**\*">
-		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>   
+		<CopyToOutputDirectory>Always</CopyToOutputDirectory>   
 	  </Content>
 	</ItemGroup>
 

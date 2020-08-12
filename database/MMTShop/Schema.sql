@@ -22,7 +22,7 @@ CREATE TABLE Catalogue.Products
 	ProductDescription VARCHAR(MAX) NOT NULL,
 	ProductFeatured BIT NOT NULL
 		CONSTRAINT DF_Products_ProductFeatured DEFAULT (0),
-	Sku AS CAST(CategoryId AS VARCHAR(10)) + RIGHT('0000'+CAST(ProductId AS VARCHAR(4)),4)
+	ProductSku AS CAST(CategoryId AS VARCHAR(10)) + RIGHT('0000'+CAST(ProductId AS VARCHAR(4)),4)
 )
 
 CREATE NONCLUSTERED INDEX IDX_Products_CategoryId ON Catalogue.Products (CategoryId)

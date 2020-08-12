@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.IO;
@@ -30,7 +31,7 @@ namespace Mmt.Shop.DataAccess.ScriptRunner
 
             var existing = GetExisting(connection);
 
-            foreach (var change in changeLog.Changes.Where(x => !existing.Contains(x.Version)).OrderBy(x => x.ReleaseDate))
+            foreach (var change in changeLog.Changes.Where(x => !existing.Contains(x.Version)))
             {
                 using var scope = new TransactionScope();
 

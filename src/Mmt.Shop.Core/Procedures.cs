@@ -5,5 +5,7 @@
         public static string CatalogueGetCategories => "Catalogue.spGetCategories";
 
         public static string CatalogueGetFeaturedProducts => "Catalogue.spGetFeaturedProducts";
+
+        public static string CatalogueGetProductsByCategoryId => "Catalogue.spGetProductsByCategoryId";
     }
 }

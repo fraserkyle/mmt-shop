@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Threading.Tasks;
 using Mmt.Shop.Core;
@@ -16,6 +17,14 @@ namespace Mmt.Shop.DataAccess.Dapper.Readers
         public async Task<IEnumerable<Product>> GetFeaturedProductsAsync()
         {
             return await ProcedureAsync<Product>(Procedures.CatalogueGetFeaturedProducts);
+        }
+
+        public async Task<IEnumerable<Product>> GetProductsByCategoryIdAsync(int categoryId)
+        {
+            return await ProcedureAsync<Product>(Procedures.CatalogueGetProductsByCategoryId, 
+                new {
+                    CategoryId = categoryId
+                });
         }
     }
 }

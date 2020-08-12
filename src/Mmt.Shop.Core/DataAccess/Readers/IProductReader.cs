@@ -7,5 +7,7 @@ namespace Mmt.Shop.Core.DataAccess.Readers
     public interface IProductReader
     {
         Task<IEnumerable<Product>> GetFeaturedProductsAsync();
+
+        Task<IEnumerable<Product>> GetProductsByCategoryIdAsync(int categoryId);
     }
 }

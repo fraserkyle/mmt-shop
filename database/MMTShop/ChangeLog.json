@@ -1,8 +1,15 @@
 {
 	"Changes": [
 		{
+			"Version": "0.0.0.4",
+			"ReleaseDate": "2020-08-12 12:59:00",
+			"Scripts": [
+				"Catalogue.spGetProductsByCategoryId"
+			]
+		},
+		{
 			"Version": "0.0.0.3",
-			"ReleaseDate": "2020-08-12 01:44:00",
+			"ReleaseDate": "2020-08-12 10:44:00",
 			"Scripts": [
 				"Catalogue.spGetCategories"
 			]

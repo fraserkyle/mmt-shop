@@ -23,7 +23,7 @@ namespace Mmt.Shop.Api.Controllers
 
         [HttpGet]
         [Route("featured")]
-        public async Task<IEnumerable<Product>> GetFeatured()
+        public async Task<IEnumerable<Product>> GetFeaturedAsync()
         {
             try
             {
@@ -32,6 +32,21 @@ namespace Mmt.Shop.Api.Controllers
             catch (Exception ex)
             {
                 _logger.LogError(ex, "An error occurred while getting featured products");
+                throw;
+            }
+        }
+
+        [HttpGet]
+        [Route("category/{categoryId}")]
+        public async Task<IEnumerable<Product>> GetProductsByCategoryIdAsync(int categoryId)
+        {
+            try
+            {
+                return await _featuredProductReader.GetProductsByCategoryIdAsync(categoryId);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "An error occurred while getting products by category id");
                 throw;
             }
         }

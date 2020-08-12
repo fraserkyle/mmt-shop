@@ -12,6 +12,26 @@ using System.Threading.Tasks;
 
 namespace Mmt.Shop.DataAccess.Dapper.Unit.Tests.Readers
 {
+    public class WhenProductReaderGetProductsByCategoryIdAsyncIsCalled : ProductReaderTestBase
+    {
+        private Task<IEnumerable<Product>> _result;
+
+        [SetUp]
+        public void SetUp()
+        {
+            ConnectionMock.SetupDapperAsync(x => x.QueryAsync<Product>(It.IsAny<string>(), It.IsAny<object>(), null, null, null))
+                .ReturnsAsync(ProductMother.OfCategory);
+            
+            Assert.DoesNotThrow(() => _result = UnderTest.GetProductsByCategoryIdAsync(1));
+        }
+
+        [Test]
+        public void ShouldReturnExpectedResult()
+        {
+            _result.Result.ShouldBe(ProductMother.OfCategory);
+        }
+    }
+
     public class WhenProductReaderGetFeaturedAsyncIsCalled : ProductReaderTestBase
     {
         private Task<IEnumerable<Product>> _result;

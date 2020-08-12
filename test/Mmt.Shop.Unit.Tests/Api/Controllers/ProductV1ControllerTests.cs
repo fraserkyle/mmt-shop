@@ -11,6 +11,31 @@ using System.Threading.Tasks;
 
 namespace Mmt.Shop.Unit.Tests.Api.Controllers
 {
+    public class WhenProductV1ControllerGetProductsByCategoryIdIsCalled : ProductV1ControllerTestBase
+    {
+        private Task<IEnumerable<Product>> _result;
+
+        [SetUp]
+        public void SetUp()
+        {
+            ProductReaderMock.Setup(x => x.GetProductsByCategoryIdAsync(It.IsAny<int>()))
+                .Returns(Task.FromResult(ProductMother.OfCategory));
+            Assert.DoesNotThrow(() => _result = UnderTest.GetProductsByCategoryIdAsync(1));
+        }
+
+        [Test]
+        public void ShouldReturnExpectedResult()
+        {
+            _result.Result.ShouldBe(ProductMother.OfCategory);
+        }                
+
+        [Test]
+        public void ShouldUseProductReader()
+        {
+            ProductReaderMock.Verify(x => x.GetProductsByCategoryIdAsync(It.IsAny<int>()));
+        }
+    }    
+    
     public class WhenProductV1ControllerGetFeaturedIsCalled : ProductV1ControllerTestBase
     {
         private Task<IEnumerable<Product>> _result;
@@ -20,15 +45,14 @@ namespace Mmt.Shop.Unit.Tests.Api.Controllers
         {
             ProductReaderMock.Setup(x => x.GetFeaturedProductsAsync())
                 .Returns(Task.FromResult(ProductMother.Featured));
-            Assert.DoesNotThrow(() => _result = UnderTest.GetFeatured());
+            Assert.DoesNotThrow(() => _result = UnderTest.GetFeaturedAsync());
         }
 
         [Test]
         public void ShouldReturnExpectedResult()
         {
             _result.Result.ShouldBe(ProductMother.Featured);
-        }
-                
+        }                
 
         [Test]
         public void ShouldUseProductReader()

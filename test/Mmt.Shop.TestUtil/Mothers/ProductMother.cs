@@ -24,5 +24,25 @@ namespace Mmt.Shop.TestUtil.Mothers
                 ProductPrice = 999.99m
             }
         };
+
+        public static IEnumerable<Product> OfCategory => new[]
+        {
+            new Product
+            {
+                ProductId = 1,
+                ProductName = "Featured Product 1.1",
+                ProductSku = "10001",
+                ProductDescription = "Featured Product 1",
+                ProductPrice = 999.99m
+            },
+            new Product
+            {
+                ProductId = 2,
+                ProductName = "Featured Product 1.2",
+                ProductSku = "10002",
+                ProductDescription = "Featured Product 1.2",
+                ProductPrice = 999.99m
+            }
+        };
     }
 }

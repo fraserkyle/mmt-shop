@@ -4,9 +4,7 @@
 			"Version": "0.0.0.1",
 			"ReleaseDate": "2020-08-12 00:00:00",
 			"Scripts": [
-				"Catalogue",
-				"Catalogue.Categories",
-				"Catalogue.Products",
+				"Schema",
 				"00002_InsertCategories",
 				"00002_InsertProducts"
 			]

@@ -1,0 +1,14 @@
+{
+  "profiles": {
+    "Mmt.Shop.Console": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "DB_NAME": "MMTShop",
+        "CATALOGUE_CONN_STRING": "Password=Password_01;Persist Security Info=True;User ID=sa;Data Source=127.0.0.1"
+      }
+    },
+    "Docker": {
+      "commandName": "Docker"
+    }
+  }
+}

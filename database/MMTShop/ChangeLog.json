@@ -1,6 +1,13 @@
 {
 	"Changes": [
 		{
+			"Version": "0.0.0.2",
+			"ReleaseDate": "2020-08-12 01:44:00",
+			"Scripts": [
+				"Catalogue.spGetFeaturedProducts"
+			]
+		},
+		{
 			"Version": "0.0.0.1",
 			"ReleaseDate": "2020-08-12 00:00:00",
 			"Scripts": [

@@ -10,6 +10,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Mmt.Shop.Core.DataAccess.Readers;
+using Mmt.Shop.DataAccess.Dapper;
 
 namespace Mmt.Shop.Api
 {
@@ -26,6 +28,7 @@ namespace Mmt.Shop.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddTransient<IFeaturedProductReader, FeaturedProductReader>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

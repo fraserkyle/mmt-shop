@@ -29,7 +29,7 @@ namespace Mmt.Shop.Console
 
             services.AddSingleton<IDemoProgram, DemoProgram>();   
 
-            services.AddHttpClient("demo", x =>
+            services.AddHttpClient(Strings.DemoClient, x =>
             {
                 x.BaseAddress = new Uri(Environment.GetEnvironmentVariable(EnvironmentVariables.API_URL));
             });

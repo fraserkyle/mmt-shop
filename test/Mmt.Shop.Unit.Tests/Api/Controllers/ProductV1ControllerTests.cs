@@ -7,19 +7,18 @@ using Moq;
 using NUnit.Framework;
 using Shouldly;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Mmt.Shop.Unit.Tests.Api.Controllers
 {
-    public class WhenGetFeaturedIsCalled : ProductV1ControllerTestBase
+    public class WhenProductV1ControllerGetFeaturedIsCalled : ProductV1ControllerTestBase
     {
         private Task<IEnumerable<Product>> _result;
 
         [SetUp]
         public void SetUp()
         {
-            FeaturedProductReaderMock.Setup(x => x.GetFeaturedProducts())
+            ProductReaderMock.Setup(x => x.GetFeaturedProductsAsync())
                 .Returns(Task.FromResult(ProductMother.Featured));
             Assert.DoesNotThrow(() => _result = UnderTest.GetFeatured());
         }
@@ -29,20 +28,27 @@ namespace Mmt.Shop.Unit.Tests.Api.Controllers
         {
             _result.Result.ShouldBe(ProductMother.Featured);
         }
+                
+
+        [Test]
+        public void ShouldUseProductReader()
+        {
+            ProductReaderMock.Verify(x => x.GetFeaturedProductsAsync());
+        }
     }
 
     public abstract class ProductV1ControllerTestBase
     {
         public Mock<ILogger<ProductV1Controller>> LoggerMock { get; private set; }
-        public Mock<IFeaturedProductReader> FeaturedProductReaderMock { get; private set; }
+        public Mock<IProductReader> ProductReaderMock { get; private set; }
         public ProductV1Controller UnderTest { get; private set; }
 
         [OneTimeSetUp]
         public void OneTimeSetUp()
         {
             LoggerMock = new Mock<ILogger<ProductV1Controller>>(); 
-            FeaturedProductReaderMock = new Mock<IFeaturedProductReader>();
-            UnderTest = new ProductV1Controller(LoggerMock.Object, FeaturedProductReaderMock.Object);
+            ProductReaderMock = new Mock<IProductReader>();
+            UnderTest = new ProductV1Controller(LoggerMock.Object, ProductReaderMock.Object);
         }
     }
 }

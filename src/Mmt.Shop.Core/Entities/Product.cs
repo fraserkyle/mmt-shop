@@ -5,6 +5,9 @@ namespace Mmt.Shop.Core.Entities
 {
     public class Product : IEquatable<Product>
     {
+        [JsonPropertyName("Id")]
+        public int ProductId { get; set; }
+
         [JsonPropertyName("Sku")]
         public string ProductSku { get; set; }
 
@@ -19,7 +22,8 @@ namespace Mmt.Shop.Core.Entities
 
         public bool Equals(Product other)
         {
-            return other.ProductSku == ProductSku 
+            return other.ProductId == ProductId 
+                && other.ProductSku == ProductSku 
                 && other.ProductName == ProductName 
                 && other.ProductDescription == ProductDescription 
                 && other.ProductPrice == ProductPrice;
@@ -32,7 +36,7 @@ namespace Mmt.Shop.Core.Entities
 
         public override int GetHashCode()
         {
-            return ProductSku.GetHashCode();
+            return HashCode.Combine(ProductId, ProductSku, ProductName, ProductDescription, ProductPrice);
         }
     }
 }

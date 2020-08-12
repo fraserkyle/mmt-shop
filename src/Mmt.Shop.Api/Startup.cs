@@ -1,17 +1,14 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
+using Mmt.Shop.Core;
 using Mmt.Shop.Core.DataAccess.Readers;
-using Mmt.Shop.DataAccess.Dapper;
+using Mmt.Shop.DataAccess.Dapper.Readers;
+using System;
+using System.Data;
+using System.Data.SqlClient;
 
 namespace Mmt.Shop.Api
 {
@@ -28,7 +25,10 @@ namespace Mmt.Shop.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddTransient<IFeaturedProductReader, FeaturedProductReader>();
+            services.AddSwaggerGen();
+            services.AddTransient<IDbConnection>(x => new SqlConnection(Environment.GetEnvironmentVariable(EnvironmentVariables.CATALOGUE_CONN_STRING)));
+            services.AddTransient<IProductReader, ProductReader>();
+            services.AddTransient<ICategoryReader, CategoryReader>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -38,6 +38,10 @@ namespace Mmt.Shop.Api
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseSwagger();
+
+            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "MMT Shop API"));
 
             app.UseHttpsRedirection();
 

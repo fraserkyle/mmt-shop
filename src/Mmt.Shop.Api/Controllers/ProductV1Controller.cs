@@ -9,13 +9,13 @@ using Mmt.Shop.Core.Entities;
 namespace Mmt.Shop.Api.Controllers
 {
     [ApiController]
-    [Route("v1/products")]
+    [Route("api/v1/products")]
     public class ProductV1Controller : ControllerBase
     {
         private readonly ILogger<ProductV1Controller> _logger;
-        private readonly IFeaturedProductReader _featuredProductReader;
+        private readonly IProductReader _featuredProductReader;
 
-        public ProductV1Controller(ILogger<ProductV1Controller> logger, IFeaturedProductReader featuredProductReader)
+        public ProductV1Controller(ILogger<ProductV1Controller> logger, IProductReader featuredProductReader)
         {
             _logger = logger;
             _featuredProductReader = featuredProductReader;
@@ -27,7 +27,7 @@ namespace Mmt.Shop.Api.Controllers
         {
             try
             {
-                return await _featuredProductReader.GetFeaturedProducts();
+                return await _featuredProductReader.GetFeaturedProductsAsync();
             }
             catch (Exception ex)
             {

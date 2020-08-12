@@ -9,6 +9,7 @@ namespace Mmt.Shop.TestUtil.Mothers
         {
             new Product
             {
+                ProductId = 1,
                 ProductName = "Featured Product 1",
                 ProductSku = "10001",
                 ProductDescription = "Featured Product 1",
@@ -16,6 +17,7 @@ namespace Mmt.Shop.TestUtil.Mothers
             },
             new Product
             {
+                ProductId = 2,
                 ProductName = "Featured Product 2",
                 ProductSku = "20002",
                 ProductDescription = "Featured Product 2",

@@ -14,3 +14,7 @@ The solution has been developed using docker compose orchestration.  I have done
 - Build the solution
 - Click debug in Visual Studio
 - Follow the instructions within the console window
+
+# Recommendations
+- Update ASP.Net logging mechanism to log to database, message queue or other storage
+- Update data access project to use metadata rather than static strings

@@ -1,7 +1,7 @@
 CREATE PROC Catalogue.spGetFeaturedProducts
 AS
 BEGIN
-	SELECT ProductSku, ProductName, ProductDescription, ProductPrice
+	SELECT P.ProductId, P.ProductSku, P.ProductName, P.ProductDescription, P.ProductPrice
 	FROM Catalogue.Products P
 		INNER JOIN Catalogue.Categories C
 			 ON P.CategoryId = C.CategoryId

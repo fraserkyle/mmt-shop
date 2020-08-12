@@ -4,8 +4,8 @@ using System.Threading.Tasks;
 
 namespace Mmt.Shop.Core.DataAccess.Readers
 {
-    public interface IFeaturedProductReader
+    public interface IProductReader
     {
-        Task<IEnumerable<Product>> GetFeaturedProducts();
+        Task<IEnumerable<Product>> GetFeaturedProductsAsync();
     }
 }

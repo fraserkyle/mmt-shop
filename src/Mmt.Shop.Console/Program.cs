@@ -1,38 +1,60 @@
-﻿using System;
-using System.IO;
-using System.Reflection;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Mmt.Shop.Console.Strategies;
 using Mmt.Shop.Core;
 using Mmt.Shop.DataAccess.ScriptRunner;
+using System;
+using System.IO;
 
 namespace Mmt.Shop.Console
 {
     class Program
     {
+        private static ServiceProvider _serviceProvider;
+
         static void Main(string[] args)
         {
-            System.Console.WriteLine("Setting up database...");
-            ExecuteScriptRunner();
-
-            System.Console.ForegroundColor = ConsoleColor.Green;
-            System.Console.WriteLine("COMPLETE");
-            System.Console.Read();
+            RegisterServices();
+            IServiceScope scope = _serviceProvider.CreateScope();
+            scope.ServiceProvider.GetRequiredService<IDemoProgram>().Run();
+            DisposeServices();
         }
 
-        private static void ExecuteScriptRunner()
+        private static void RegisterServices()
         {
-            var client = new ScriptRunnerClient(new ScriptRunnerSettings
+            var services = new ServiceCollection();
+            services.AddSingleton<IDemoProgramStrategy, ApplyDbChangeLogStrategy>();  
+            services.AddSingleton<IDemoProgramStrategy, ListCategoriesStrategy>();
+            services.AddSingleton<IDemoProgramStrategy, ListFeaturedProductsStrategy>();
+            services.AddSingleton<IDemoProgramStrategy, ListProductsInCategoryStrategy>();
+
+            services.AddSingleton<IDemoProgram, DemoProgram>();   
+
+            services.AddHttpClient("demo", x =>
             {
-                BasePath = Path.Combine(GetExecutingDirectory(), Environment.GetEnvironmentVariable(EnvironmentVariables.DB_NAME)),
+                x.BaseAddress = new Uri(Environment.GetEnvironmentVariable(EnvironmentVariables.API_URL));
+            });
+            
+            services.AddSingleton<IScriptRunnerClient, ScriptRunnerClient>();
+            services.AddSingleton(x => new ScriptRunnerSettings
+            {
+                BasePath = Path.Combine(DirectoryHelper.GetExecutingDirectory(), Environment.GetEnvironmentVariable(EnvironmentVariables.DB_NAME)),
                 ConnectionString = Environment.GetEnvironmentVariable(EnvironmentVariables.CATALOGUE_CONN_STRING)
             });
 
-            client.Run();
+            _serviceProvider = services.BuildServiceProvider(true);
         }
 
-        public static string GetExecutingDirectory()
+        private static void DisposeServices()
         {
-            var location = new Uri(Assembly.GetEntryAssembly().GetName().CodeBase);
-            return new FileInfo(location.AbsolutePath).Directory.FullName;
+            if (_serviceProvider == null)
+            {
+                return;
+            }
+
+            if (_serviceProvider is IDisposable)
+            {
+                ((IDisposable)_serviceProvider).Dispose();
+            }
         }
     }
 }

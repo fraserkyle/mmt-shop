@@ -4,6 +4,7 @@
       "commandName": "Project",
       "environmentVariables": {
         "DB_NAME": "MMTShop",
+        "API_URL": "https://localhost:44327/",
         "CATALOGUE_CONN_STRING": "Password=Password_01;Persist Security Info=True;User ID=sa;Data Source=127.0.0.1"
       }
     },

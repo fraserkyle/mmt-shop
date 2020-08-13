@@ -3,8 +3,6 @@ MMT Shop - Technical Test
 
 # Running the solution
 
-The solution has been developed using docker compose orchestration.  I have done this to ensure identical execution environment when running the solution on your machine.
-
 - Follow the instructions within the console window
 ## Running the solution
 '''

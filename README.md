@@ -2,9 +2,6 @@
 MMT Shop - Technical Test
 
 # Running the solution
-
-- Follow the instructions within the console window
-## Running the solution
 '''
 **Note**
 I have included code to generate the database for you within this solution.  Simply follow the instructions below then select option a to generate the MMTShop database on your SQL Server instance.
